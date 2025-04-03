@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Maize\AccessLogs\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class AccessLogsCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-access-logs';
 
     public $description = 'My command';
 

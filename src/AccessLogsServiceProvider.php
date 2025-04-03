@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace Maize\AccessLogs;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Commands\SkeletonCommand;
+use Maize\AccessLogs\Commands\AccessLogsCommand;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class AccessLogsServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -16,10 +16,10 @@ class SkeletonServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('skeleton')
+            ->name('laravel-access-logs')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_migration_table_name_table')
-            ->hasCommand(SkeletonCommand::class);
+            ->hasMigration('create_laravel_access_logs_table')
+            ->hasCommand(AccessLogsCommand::class);
     }
 }
