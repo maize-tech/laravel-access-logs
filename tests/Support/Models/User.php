@@ -5,10 +5,12 @@ namespace Maize\AccessLogs\Tests\Support\Models;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Maize\AccessLogs\Concerns\HasAccessLogs;
 use Maize\AccessLogs\Tests\Support\Factories\UserFactory;
 
 class User extends Authenticatable
 {
+    use HasAccessLogs;
     use HasFactory;
 
     protected $fillable = [];
