@@ -2,9 +2,9 @@
 
 namespace Maize\AccessLogs;
 
+use Maize\AccessLogs\Commands\AccessLogsCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Maize\AccessLogs\Commands\AccessLogsCommand;
 
 class AccessLogsServiceProvider extends PackageServiceProvider
 {
