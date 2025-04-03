@@ -40,7 +40,7 @@ class TestCase extends Orchestra
             response()->noContent()
         ))->middleware([
             'auth',
-            LogAccess::class
+            LogAccess::class,
         ])->name('route');
     }
 }
