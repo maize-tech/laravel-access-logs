@@ -63,10 +63,7 @@
         "laravel": {
             "providers": [
                 "Maize\\AccessLogs\\AccessLogsServiceProvider"
-            ],
-            "aliases": {
-                "AccessLogs": "Maize\\AccessLogs\\Facades\\AccessLogs"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",
