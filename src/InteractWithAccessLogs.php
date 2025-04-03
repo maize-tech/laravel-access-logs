@@ -1,0 +1,28 @@
+<?php
+
+namespace Maize\AccessLogs;
+
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Maize\AccessLogs\Models\AccessLog;
+
+/** @phpstan-ignore trait.unused */
+trait InteractWithAccessLogs
+{
+    public static function bootInteractWithAccessLogs(): void
+    {
+        static::deleting(fn (Authenticatable&HasAccessLogs $model) => (
+            $model
+                ->accessLogs()
+                ->cursor()
+                ->each(fn (AccessLog $media) => (
+                    $media->delete()
+                ))
+        ));
+    }
+
+    public function accessLogs(): MorphMany
+    {
+        return $this->morphMany(AccessLog::class, 'model');
+    }
+}

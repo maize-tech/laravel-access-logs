@@ -4,7 +4,7 @@ namespace Maize\AccessLogs\Events;
 
 use Maize\AccessLogs\Models\AccessLog;
 
-class LoggedIn
+class NewAccess
 {
     public function __construct(
         public AccessLog $accessLog

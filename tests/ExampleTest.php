@@ -40,7 +40,7 @@ it('can not register logs when user is not authenticated', function () {
     ]);
 });
 
-it('can register logs for many models', function () {
+it('can register logs for many model type', function () {
 
     /** @var Authenticatable $user */
     $user = User::factory()->create();
