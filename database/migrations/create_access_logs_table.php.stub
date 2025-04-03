@@ -8,12 +8,16 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('laravel_access_logs_table', function (Blueprint $table) {
+        Schema::create('access_logs', function (Blueprint $table) {
             $table->id();
-
-            // add fields
-
+            $table->morphs('model');
+            $table->dateTime('accessed_at');
             $table->timestamps();
         });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('access_logs');
     }
 };
