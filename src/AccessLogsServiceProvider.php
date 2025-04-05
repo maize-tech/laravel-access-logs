@@ -13,7 +13,7 @@ class AccessLogsServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-access-logs')
             ->hasConfigFile()
-            ->hasMigration('create_laravel_access_logs_table')
+            ->hasMigration('create_access_logs_table')
             ->hasCommand(AccessLogsCommand::class);
     }
 }
