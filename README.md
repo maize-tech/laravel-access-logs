@@ -75,10 +75,31 @@ return [
 
 ## Usage
 
+To log users' access, the user model must implement the following interface and trait:
+
 ```php
-$accessLogs = new Maize\AccessLogs();
-echo $accessLogs->echoPhrase('Hello, Maize!');
+namespace App\Models;
+
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Maize\AccessLogs\HasAccessLogs;
+use Maize\AccessLogs\InteractWithAccessLogs;
+
+class User extends Authenticatable implements HasAccessLogs
+{
+    use InteractWithAccessLogs;
+}
+
 ```
+
+Once done, you can add LogAccess middleware in your route group:
+```php
+Route::middleware(['auth:sanctum', LogAccess::class])->group(function () {
+    // ...
+});
+
+```
+
+TODO
 
 ## Testing
 
