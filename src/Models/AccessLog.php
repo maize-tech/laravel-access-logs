@@ -10,8 +10,8 @@ use Maize\AccessLogs\Events\NewAccess;
 use Maize\AccessLogs\HasAccessLogs;
 
 /**
- * @property string $model_type
- * @property int $model_id
+ * @property string $user_type
+ * @property int $user_id
  * @property Carbon $accessed_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -24,8 +24,8 @@ class AccessLog extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'model_type',
-        'model_id',
+        'user_type',
+        'user_id',
         'accessed_at',
     ];
 
@@ -49,7 +49,7 @@ class AccessLog extends Model
         'created' => NewAccess::class,
     ];
 
-    public function model(): MorphTo
+    public function user(): MorphTo
     {
         return $this->morphTo();
     }
@@ -60,8 +60,8 @@ class AccessLog extends Model
         return static::query()
             ->whereToday('accessed_at')
             ->firstOrCreate([
-                'model_id' => $user->getKey(),
-                'model_type' => $user->getMorphClass(),
+                'user_id' => $user->getKey(),
+                'user_type' => $user->getMorphClass(),
             ], [
                 'accessed_at' => now(),
             ]);
@@ -71,8 +71,8 @@ class AccessLog extends Model
         Authenticatable&HasAccessLogs $user
     ): ?self {
         return static::query()
-            ->where('model_id', $user->getKey())
-            ->where('model_type', $user->getMorphClass())
+            ->where('user_id', $user->getKey())
+            ->where('user_type', $user->getMorphClass())
             ->latest('accessed_at')
             ->first();
     }

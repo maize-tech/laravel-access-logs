@@ -21,8 +21,8 @@ it('can register logs', function () {
         ->assertStatus(204);
 
     assertDatabaseHas((new AccessLog)->getTable(), [
-        'model_id' => $user->getKey(),
-        'model_type' => $user->getMorphClass(),
+        'user_id' => $user->getKey(),
+        'user_type' => $user->getMorphClass(),
     ]);
 });
 
@@ -35,8 +35,8 @@ it('can not register logs when user is not authenticated', function () {
         ->assertStatus(401);
 
     assertDatabaseMissing((new AccessLog)->getTable(), [
-        'model_id' => $user->getKey(),
-        'model_type' => $user->getMorphClass(),
+        'user_id' => $user->getKey(),
+        'user_type' => $user->getMorphClass(),
     ]);
 });
 
@@ -57,13 +57,13 @@ it('can register logs for many model types', function () {
         ->assertStatus(204);
 
     assertDatabaseHas((new AccessLog)->getTable(), [
-        'model_id' => $user->getKey(),
-        'model_type' => $user->getMorphClass(),
+        'user_id' => $user->getKey(),
+        'user_type' => $user->getMorphClass(),
     ]);
 
     assertDatabaseHas((new AccessLog)->getTable(), [
-        'model_id' => $admin->getKey(),
-        'model_type' => $admin->getMorphClass(),
+        'user_id' => $admin->getKey(),
+        'user_type' => $admin->getMorphClass(),
     ]);
 
     assertDatabaseCount((new AccessLog)->getTable(), 2);
@@ -83,8 +83,8 @@ it('can register one log per day per user', function () {
         ->assertStatus(204);
 
     assertDatabaseHas((new AccessLog)->getTable(), [
-        'model_id' => $user->getKey(),
-        'model_type' => $user->getMorphClass(),
+        'user_id' => $user->getKey(),
+        'user_type' => $user->getMorphClass(),
     ]);
 
     assertDatabaseCount((new AccessLog)->getTable(), 1);
