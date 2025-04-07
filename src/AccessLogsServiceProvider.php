@@ -2,7 +2,7 @@
 
 namespace Maize\AccessLogs;
 
-use Maize\AccessLogs\Commands\AccessLogsCommand;
+use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -14,6 +14,12 @@ class AccessLogsServiceProvider extends PackageServiceProvider
             ->name('laravel-access-logs')
             ->hasConfigFile()
             ->hasMigration('create_access_logs_table')
-            ->hasCommand(AccessLogsCommand::class);
+            ->hasInstallCommand(
+                fn (InstallCommand $command) => $command
+                    ->publishConfigFile()
+                    ->publishMigrations()
+                    ->askToRunMigrations()
+                    ->askToStarRepoOnGitHub('maize-tech/laravel-access-logs')
+            );
     }
 }
