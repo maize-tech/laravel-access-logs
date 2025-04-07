@@ -5,8 +5,8 @@ namespace Maize\AccessLogs\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Maize\AccessLogs\HasAccessLogs;
-use Maize\AccessLogs\Models\AccessLog;
 use Maize\AccessLogs\Support\Cache;
+use Maize\AccessLogs\Support\Config;
 use Symfony\Component\HttpFoundation\Response;
 
 class LogAccess
@@ -20,7 +20,7 @@ class LogAccess
         }
 
         $lastAccess = Cache::for($user)->remember(fn () => (
-            AccessLog::lastAccess($user)
+            Config::getModel()::lastAccess($user)
         ));
 
         $isToday = $lastAccess?->accessed_at?->isToday() ?? false;
@@ -29,7 +29,7 @@ class LogAccess
             Cache::for($user)->forget();
 
             Cache::for($user)->remember(fn () => (
-                AccessLog::registerAccess($user)
+                Config::getModel()::registerAccess($user)
             ));
         }
 

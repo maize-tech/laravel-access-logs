@@ -3,7 +3,7 @@
 return [
     'model' => null,
 
-    // ttl
-    // cache
+    'cache_ttl' => null,
 
+    'cache_key_action' => null,
 ];

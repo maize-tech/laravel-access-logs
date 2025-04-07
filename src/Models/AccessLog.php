@@ -58,7 +58,7 @@ class AccessLog extends Model
         Authenticatable&HasAccessLogs $user
     ): self {
         return static::query()
-            ->whereDate('accessed_at', now())
+            ->whereToday('accessed_at')
             ->firstOrCreate([
                 'model_id' => $user->getKey(),
                 'model_type' => $user->getMorphClass(),

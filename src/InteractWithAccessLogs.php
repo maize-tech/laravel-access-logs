@@ -5,6 +5,7 @@ namespace Maize\AccessLogs;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Maize\AccessLogs\Models\AccessLog;
+use Maize\AccessLogs\Support\Config;
 
 /** @phpstan-ignore trait.unused */
 trait InteractWithAccessLogs
@@ -23,6 +24,6 @@ trait InteractWithAccessLogs
 
     public function accessLogs(): MorphMany
     {
-        return $this->morphMany(AccessLog::class, 'model');
+        return $this->morphMany(Config::getModel()::class, 'model');
     }
 }

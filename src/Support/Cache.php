@@ -37,16 +37,13 @@ class Cache
 
     protected function ttl(): int
     {
-        return 3600; // 1 hour
+        return Config::getCacheTtl();
     }
 
     protected function key(): string
     {
-        return implode('.', [
-            'access-logs',
-            $this->model->getMorphClass(),
-            $this->model->getKey(),
-            'last_login', // TODO name
-        ]);
+        return Config::getGetCacheKeyAction()(
+            $this->model
+        );
     }
 }
