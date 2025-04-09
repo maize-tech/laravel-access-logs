@@ -24,6 +24,6 @@ trait InteractWithAccessLogs
 
     public function accessLogs(): MorphMany
     {
-        return $this->morphMany(Config::getModel()::class, 'model');
+        return $this->morphMany(Config::getModel()::class, 'user');
     }
 }
