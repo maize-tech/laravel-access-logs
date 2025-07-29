@@ -10,6 +10,7 @@ use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Laravel\getJson;
+use function Spatie\PestPluginTestTime\testTime;
 
 it('can register logs', function () {
 
@@ -88,4 +89,38 @@ it('can register one log per day per user', function () {
     ]);
 
     assertDatabaseCount((new AccessLog)->getTable(), 1);
+});
+
+it('can register multiple days', function () {
+
+    /** @var Authenticatable $user */
+    $user = User::factory()->create();
+
+    testTime()->freeze('2025-07-29 13:05:00');
+
+    actingAs($user)
+        ->getJson(route('route'))
+        ->assertStatus(204);
+
+    assertDatabaseHas((new AccessLog)->getTable(), [
+        'user_id' => $user->getKey(),
+        'user_type' => $user->getMorphClass(),
+        'accessed_at' => '2025-07-29 13:05:00',
+    ]);
+
+    assertDatabaseCount((new AccessLog)->getTable(), 1);
+
+    testTime()->addDay();
+
+    actingAs($user)
+        ->getJson(route('route'))
+        ->assertStatus(204);
+
+    assertDatabaseHas((new AccessLog)->getTable(), [
+        'user_id' => $user->getKey(),
+        'user_type' => $user->getMorphClass(),
+        'accessed_at' => '2025-07-30 13:05:00',
+    ]);
+
+    assertDatabaseCount((new AccessLog)->getTable(), 2);
 });
