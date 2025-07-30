@@ -4,6 +4,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Maize\AccessLogs\Models\AccessLog;
 use Maize\AccessLogs\Tests\Support\Models\Admin;
 use Maize\AccessLogs\Tests\Support\Models\User;
+use Illuminate\Support\Facades\Event;
+use Maize\AccessLogs\Events\NewAccess;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseCount;
@@ -93,6 +95,8 @@ it('can register one log per day per user', function () {
 
 it('can register multiple days', function () {
 
+    Event::fake();
+
     /** @var Authenticatable $user */
     $user = User::factory()->create();
 
@@ -123,4 +127,38 @@ it('can register multiple days', function () {
     ]);
 
     assertDatabaseCount((new AccessLog)->getTable(), 2);
+
+    Event::assertDispatchedTimes(NewAccess::class, 2);
+});
+
+it('can fire an new access event', function () {
+
+    Event::fake();
+
+    /** @var Authenticatable $user */
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('route'))
+        ->assertStatus(204);
+
+    Event::assertDispatchedTimes(NewAccess::class, 1);
+});
+
+it('can not fire an new access event in the same day', function () {
+
+    Event::fake();
+
+    /** @var Authenticatable $user */
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('route'))
+        ->assertStatus(204);
+
+    actingAs($user)
+        ->getJson(route('route'))
+        ->assertStatus(204);
+
+    Event::assertDispatchedTimes(NewAccess::class, 1);
 });
