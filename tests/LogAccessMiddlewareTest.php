@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Event;
+use Maize\AccessLogs\Events\NewAccess;
 use Maize\AccessLogs\Models\AccessLog;
 use Maize\AccessLogs\Tests\Support\Models\Admin;
 use Maize\AccessLogs\Tests\Support\Models\User;
-use Illuminate\Support\Facades\Event;
-use Maize\AccessLogs\Events\NewAccess;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseCount;
