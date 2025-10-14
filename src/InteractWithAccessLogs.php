@@ -16,8 +16,8 @@ trait InteractWithAccessLogs
             $model
                 ->accessLogs()
                 ->cursor()
-                ->each(fn (AccessLog $media) => (
-                    $media->delete()
+                ->each(fn (AccessLog $log) => (
+                    $log->delete()
                 ))
         ));
     }
