@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Maize\AccessLogs\HasAccessLogs;
-use Maize\AccessLogs\InteractWithAccessLogs;
+use Maize\AccessLogs\InteractsWithAccessLogs;
 use Maize\AccessLogs\Tests\Support\Factories\AdminFactory;
 
 class Admin extends Authenticatable implements HasAccessLogs
 {
     use HasFactory;
-    use InteractWithAccessLogs;
+    use InteractsWithAccessLogs;
 
     protected $fillable = [];
 

@@ -82,11 +82,11 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Maize\AccessLogs\HasAccessLogs;
-use Maize\AccessLogs\InteractWithAccessLogs;
+use Maize\AccessLogs\InteractsWithAccessLogs;
 
 class User extends Authenticatable implements HasAccessLogs
 {
-    use InteractWithAccessLogs;
+    use InteractsWithAccessLogs;
 }
 
 ```

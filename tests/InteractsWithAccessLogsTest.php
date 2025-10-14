@@ -33,4 +33,4 @@ it('can delete logs when deleted user', function () {
     $user2->delete();
 
     assertDatabaseCount((new AccessLog)->getTable(), 0);
-})->only();
+});
