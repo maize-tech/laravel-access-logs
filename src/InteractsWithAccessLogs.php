@@ -11,7 +11,7 @@ trait InteractsWithAccessLogs
 {
     public static function bootInteractsWithAccessLogs(): void
     {
-        static::deleting(fn (Model $model) => (
+        static::deleted(fn (Model $model) => (
             $model->accessLogs()->delete()
         ));
     }
