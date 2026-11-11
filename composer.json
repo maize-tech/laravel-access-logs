@@ -1,10 +1,14 @@
 {
     "name": "maize-tech/laravel-access-logs",
-    "description": "This is my package laravel-access-logs",
+    "description": "Easily log daily user access to your Laravel application",
     "keywords": [
-        "Maize",
+        "maize-tech",
         "laravel",
-        "laravel-access-logs"
+        "access-logs",
+        "access",
+        "logs",
+        "last-login",
+        "user-activity"
     ],
     "homepage": "https://github.com/maize-tech/laravel-access-logs",
     "license": "MIT",
@@ -17,32 +21,32 @@
     ],
     "require": {
         "php": "^8.3",
-        "spatie/laravel-package-tools": "^1.16",
-        "illuminate/contracts": "^11.0||^12.0"
+        "illuminate/contracts": "^10.0|^11.0|^12.0|^13.0",
+        "illuminate/database": "^10.0|^11.0|^12.0|^13.0",
+        "illuminate/http": "^10.0|^11.0|^12.0|^13.0",
+        "illuminate/support": "^10.0|^11.0|^12.0|^13.0",
+        "spatie/laravel-package-tools": "^1.16"
     },
     "require-dev": {
-        "larastan/larastan": "^2.9||^3.0",
+        "larastan/larastan": "^2.9|^3.0",
         "laravel/pint": "^1.14",
-        "nunomaduro/collision": "^8.1.1||^7.10.0",
-        "orchestra/testbench": "^9.0.0||^8.22.0",
-        "pestphp/pest": "^3.0",
-        "pestphp/pest-plugin-arch": "^3.0",
-        "pestphp/pest-plugin-laravel": "^3.0",
-        "phpstan/extension-installer": "^1.3||^2.0",
-        "phpstan/phpstan-deprecation-rules": "^1.1||^2.0",
-        "phpstan/phpstan-phpunit": "^1.3||^2.0",
+        "orchestra/testbench": "^8.0|^9.0|^10.0|^11.0",
+        "pestphp/pest": "^2.34|^3.0|^4.0",
+        "pestphp/pest-plugin-arch": "^2.7|^3.0|^4.0",
+        "pestphp/pest-plugin-laravel": "^2.3|^3.0|^4.0",
+        "phpstan/extension-installer": "^1.3|^2.0",
+        "phpstan/phpstan-deprecation-rules": "^1.1|^2.0",
+        "phpstan/phpstan-phpunit": "^1.3|^2.0",
         "spatie/pest-plugin-test-time": "^2.2"
     },
     "autoload": {
         "psr-4": {
-            "Maize\\AccessLogs\\": "src/",
-            "Maize\\AccessLogs\\Database\\Factories\\": "database/factories/"
+            "Maize\\AccessLogs\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Maize\\AccessLogs\\Tests\\": "tests/",
-            "Workbench\\App\\": "workbench/app/"
+            "Maize\\AccessLogs\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -50,7 +54,7 @@
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "analyse": "vendor/bin/phpstan analyse",
         "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage",
+        "test-coverage": "XDEBUG_MODE=coverage vendor/bin/pest --coverage",
         "format": "vendor/bin/pint"
     },
     "config": {

@@ -4,7 +4,6 @@ namespace Maize\AccessLogs\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Carbon;
 use Maize\AccessLogs\Events\NewAccess;
 use Maize\AccessLogs\HasAccessLogs;
@@ -43,7 +42,7 @@ class AccessLog extends Model
      *
      * Allows for object-based events for native Eloquent events.
      *
-     * @var array
+     * @var array<string, class-string>
      */
     protected $dispatchesEvents = [
         'created' => NewAccess::class,
@@ -55,7 +54,7 @@ class AccessLog extends Model
     }
 
     public static function registerAccess(
-        Authenticatable&HasAccessLogs $user
+        Model&HasAccessLogs $user
     ): self {
         return static::query()
             ->whereToday('accessed_at')
@@ -68,7 +67,7 @@ class AccessLog extends Model
     }
 
     public static function lastAccess(
-        Authenticatable&HasAccessLogs $user
+        Model&HasAccessLogs $user
     ): ?self {
         return static::query()
             ->where('user_id', $user->getKey())

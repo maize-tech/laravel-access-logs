@@ -3,6 +3,7 @@
 namespace Maize\AccessLogs\Tests;
 
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Maize\AccessLogs\AccessLogsServiceProvider;
@@ -22,7 +23,7 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
 
-        foreach (\Illuminate\Support\Facades\File::allFiles(__DIR__.'/../database/migrations') as $migration) {
+        foreach (File::allFiles(__DIR__.'/../database/migrations') as $migration) {
             (include $migration->getRealPath())->up();
         }
 
