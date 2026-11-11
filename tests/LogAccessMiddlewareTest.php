@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Event;
 use Maize\AccessLogs\Events\NewAccess;
 use Maize\AccessLogs\Models\AccessLog;
 use Maize\AccessLogs\Tests\Support\Models\Admin;
+use Maize\AccessLogs\Tests\Support\Models\Guest;
 use Maize\AccessLogs\Tests\Support\Models\User;
 
 use function Pest\Laravel\actingAs;
@@ -161,4 +162,15 @@ it('can not fire an new access event in the same day', function () {
         ->assertStatus(204);
 
     Event::assertDispatchedTimes(NewAccess::class, 1);
+});
+
+it('can not register logs when user does not implement HasAccessLogs', function () {
+
+    $guest = Guest::query()->create();
+
+    actingAs($guest)
+        ->getJson(route('route'))
+        ->assertStatus(204);
+
+    assertDatabaseCount((new AccessLog)->getTable(), 0);
 });

@@ -2,13 +2,13 @@
 
 namespace Maize\AccessLogs\Actions;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Maize\AccessLogs\HasAccessLogs;
 
 class GetCacheKeyAction
 {
     public function __invoke(
-        Authenticatable&HasAccessLogs $model
+        Model&HasAccessLogs $model
     ): string {
         return implode('.', [
             'access-logs',

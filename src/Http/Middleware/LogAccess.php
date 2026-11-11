@@ -3,6 +3,7 @@
 namespace Maize\AccessLogs\Http\Middleware;
 
 use Closure;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Maize\AccessLogs\HasAccessLogs;
 use Maize\AccessLogs\Support\Cache;
@@ -15,7 +16,7 @@ class LogAccess
     {
         $user = $request->user();
 
-        if (! $user instanceof HasAccessLogs) {
+        if (! $user instanceof Model || ! $user instanceof HasAccessLogs) {
             return $next($request);
         }
 

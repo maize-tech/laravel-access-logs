@@ -3,18 +3,18 @@
 namespace Maize\AccessLogs\Support;
 
 use Closure;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache as BaseCache;
 use Maize\AccessLogs\HasAccessLogs;
 
 class Cache
 {
     public function __construct(
-        protected Authenticatable&HasAccessLogs $model
+        protected Model&HasAccessLogs $model
     ) {}
 
     public static function for(
-        Authenticatable&HasAccessLogs $model
+        Model&HasAccessLogs $model
     ): self {
         return new self($model);
     }

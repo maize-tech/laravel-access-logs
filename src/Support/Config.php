@@ -17,13 +17,13 @@ class Config
 
     public static function getCacheTtl(): int
     {
-        return config('access-log.cache_ttl')
+        return config('access-logs.cache_ttl')
             ?? 3600; // 1 hour
     }
 
     public static function getGetCacheKeyAction(): GetCacheKeyAction
     {
-        $action = config('access-log.cache_key_action')
+        $action = config('access-logs.cache_key_action')
             ?? GetCacheKeyAction::class;
 
         return app($action);
